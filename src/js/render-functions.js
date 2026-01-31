@@ -5,7 +5,7 @@ const galleryContainer = document.querySelector('.gallery');
 let lightbox = null;
 
 function createGallery(images) {
-  galleryContainer.innerHTML = images
+  const markup = images
     .map(
       image => `
     <a class="gallery-item" href="${image.largeImageURL}">
@@ -20,6 +20,8 @@ function createGallery(images) {
   `
     )
     .join('');
+
+  galleryContainer.insertAdjacentHTML('beforeend', markup);
 
   if (lightbox) {
     lightbox.refresh();
@@ -57,3 +59,17 @@ function hideLoader() {
 }
 
 export { hideLoader };
+
+const loadMoreButton = document.querySelector('.load-more-btn');
+
+function showLoadMoreButton() {
+  loadMoreButton.classList.remove('is-hidden');
+}
+
+export { showLoadMoreButton };
+
+function hideLoadMoreButton() {
+  loadMoreButton.classList.add('is-hidden');
+}
+
+export { hideLoadMoreButton };
