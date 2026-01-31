@@ -1,0 +1,12 @@
+import{a as f,S as m,i as l}from"./assets/vendor-xpOxgMII.js";(function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))i(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const n of t.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&i(n)}).observe(document,{childList:!0,subtree:!0});function s(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function i(e){if(e.ep)return;e.ep=!0;const t=s(e);fetch(e.href,t)}})();const y="54439689-be74ec06959a2901216bd7b02";f.defaults.baseURL="https://pixabay.com/api";function g(o){return f.get("/",{params:{key:y,q:o,image_type:"photo",orientation:"horizontal",safesearch:!0,per_page:21}})}const d=document.querySelector(".gallery");let a=null;function h(o){d.innerHTML=o.map(r=>`
+    <a class="gallery-item" href="${r.largeImageURL}">
+      <img class="gallery-image" src="${r.webformatURL}" alt="${r.tags}" loading="lazy" />
+      <div class="gallery-info">
+        <p class="gallery-info-item"><b>Likes:</b> ${r.likes}</p>
+        <p class="gallery-info-item"><b>Views:</b> ${r.views}</p>
+        <p class="gallery-info-item"><b>Comments:</b> ${r.comments}</p>
+        <p class="gallery-info-item"><b>Downloads:</b> ${r.downloads}</p>
+      </div>
+    </a>
+  `).join(""),a?a.refresh():a=new m(".gallery a",{captionsData:"alt",captionDelay:250,showCounter:!0,overlayOpacity:.8})}function b(){d.innerHTML="",a&&a.refresh()}const p=document.querySelector(".loader-container");function L(){p.classList.remove("is-hidden")}function c(){p.classList.add("is-hidden")}const v=document.querySelector("form"),u=document.querySelector('input[name="search-text"]');v.addEventListener("submit",w);function w(o){o.preventDefault(),b();const r=u.value.trim();if(u.value="",r===""){l.error({title:"Error",message:"Please enter a search query.",position:"topRight"});return}L(),g(r).then(s=>{c();const i=s.data.hits;if(i.length===0){l.info({title:"No Results",message:"Sorry, there are no images matching your search query. Please try again!",position:"topRight"});return}h(i)}).catch(s=>{c(),l.error({title:"Error",message:"An error occurred while fetching images.",position:"topRight"}),console.error(s)})}
+//# sourceMappingURL=index.js.map
